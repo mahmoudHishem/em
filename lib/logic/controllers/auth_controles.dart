@@ -2,6 +2,7 @@ import 'package:em/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthControlles extends GetxController{
@@ -11,6 +12,21 @@ class AuthControlles extends GetxController{
   var displayUserPhoto = ''.obs;
   var displayUserEmail = ''.obs;
   FirebaseAuth auth=FirebaseAuth.instance;
+  var googleSignIn = GoogleSignIn();
+
+  var isSignedIn =false;
+  final GetStorage authBox =GetStorage();
+  User ?get userProfile =>auth.currentUser;
+  @override
+  void onInit() {
+    displayUserName.value=
+    (userProfile !=null ? userProfile!.displayName:"")!;
+   displayUserPhoto.value=
+    (userProfile !=null ? userProfile!.photoURL:"")!;
+    displayUserEmail.value=
+    (userProfile !=null ? userProfile!.email:"")!;
+    super.onInit();
+  }
 
 
   void visibility(){
@@ -38,6 +54,9 @@ class AuthControlles extends GetxController{
         auth.currentUser!.updateDisplayName(name);
 
        });
+
+
+
       update();
       Get.offNamed(Routes.mainScreen);
     } on FirebaseAuthException catch (error) {
@@ -74,6 +93,8 @@ class AuthControlles extends GetxController{
           email: email,
           password: password,
       ).then((value) => displayUserName.value =auth.currentUser!.displayName!);
+      isSignedIn =true;
+      authBox.write("auth", isSignedIn);
       update();
       Get.offNamed(Routes.mainScreen);
 
@@ -108,17 +129,19 @@ class AuthControlles extends GetxController{
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       displayUserName.value=googleUser!.displayName!;
       displayUserPhoto.value=googleUser.photoUrl!;
-      displayUserEmail.value = googleUser.email;
-
-      GoogleSignInAuthentication googleSignInAuthentication =
+      displayUserEmail.value=googleUser.email;
+      GoogleSignInAuthentication googleSignInAuthentication=
       await googleUser.authentication;
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        idToken: googleSignInAuthentication.idToken,
-        accessToken: googleSignInAuthentication.accessToken,
+      final AuthCredential credential =GoogleAuthProvider.credential(
+        idToken:googleSignInAuthentication.idToken,
+        accessToken:googleSignInAuthentication.accessToken,
+
       );
 
-      await auth.signInWithCredential(credential);
-
+await auth.signInWithCredential(credential);
+      isSignedIn =true;
+      authBox.write("auth", isSignedIn);
+      isSignedIn =true;
 
       update();
 
@@ -156,7 +179,27 @@ class AuthControlles extends GetxController{
       BOTTOM,backgroundColor: Colors.black,colorText: Colors.white , );
     print(e);
   }}
-  void signOutFromApp(){}
+  void signOutFromApp()async{
+    try {
+      await auth.signOut();
+      await  googleSignIn.signOut();
+      displayUserName.value= '' ;
+      displayUserPhoto.value= '' ;
+      isSignedIn =false;
+      authBox.remove("auth");
+
+      update();
+      Get.offNamed(Routes.wellcomeScreen);
+
+    }
+        catch(error){
+      Get.snackbar("Error",
+          error.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.green,
+      colorText: Colors.white);
+        }
+  }
 
 
 

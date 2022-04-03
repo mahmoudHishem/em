@@ -23,7 +23,7 @@ class LoginScreen extends StatelessWidget {
       child: Scaffold(
 
         appBar: AppBar(
-          backgroundColor:Get.isDarkMode? Colors.white:Colors.black,
+          backgroundColor:Get.isDarkMode? Colors.black:Colors.green,
           elevation: 0,
 
         ),
@@ -41,13 +41,13 @@ class LoginScreen extends StatelessWidget {
                       child:  Column(
                         children: [
                           Row(children: [
-                            UtiliesText(text: 'SIGN',
+                            UtiliesText(text: 'LOG',
                                 fontWeight: FontWeight.w500,
                                 fontSize:28,
-                                color: Get.isDarkMode? Colors.green:Colors.pink,
+                                color: Get.isDarkMode? Colors.pink:Colors.green,
                                 underLine: TextDecoration.none),
                             SizedBox(width: 3,),
-                            UtiliesText(text: 'UP',
+                            UtiliesText(text: 'IN',
                                 fontWeight: FontWeight.w500,
                                 fontSize:28,
                                 color: Get.isDarkMode? Colors.white:Colors.black,
@@ -71,9 +71,10 @@ class LoginScreen extends StatelessWidget {
                             } ,
                             obscureText: false,
                             prefixIcon: Get.isDarkMode?
-                            Icon(Icons.email,color: Colors.green,):
-                            Icon(Icons.email,color: Colors.pink,),
-                            suffixIcon: Text(''),
+                            Icon(Icons.email,color: Colors.pink,):
+                            Icon(Icons.email,color: Colors.green,),
+
+                            suffixIcon: Text('',style: TextStyle(color: Colors.black),),
                             hintText: 'Email',
 
                           ),
@@ -90,8 +91,9 @@ class LoginScreen extends StatelessWidget {
                               } ,
                               obscureText: controller.isVisibility?false:true,
                               prefixIcon:Get.isDarkMode?
-                              Icon(Icons.lock,color: Colors.green,):
-                              Icon(Icons.lock,color: Colors.pink,),
+                              Icon(Icons.lock,color: Colors.pink,):
+
+                                Icon(Icons.lock,color: Colors.green,),
                               suffixIcon: IconButton(onPressed: (){
                                 controller.visibility();
                               },
@@ -110,7 +112,7 @@ class LoginScreen extends StatelessWidget {
                              child: UtiliesText(text: 'Forgot Password?',
                                  fontWeight: FontWeight.bold,
                                  fontSize: 14,
-                                 color:Get.isDarkMode?Colors.black:Colors.white,
+                                 color:Get.isDarkMode?Colors.white:Colors.black,
                                  underLine: TextDecoration.none)),
                          )
 ,
@@ -130,7 +132,7 @@ class LoginScreen extends StatelessWidget {
                           UtiliesText(text: 'OR',
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
-                              color:Get.isDarkMode?Colors.black:Colors.white,
+                              color:Get.isDarkMode?Colors.white:Colors.black,
                               underLine: TextDecoration.none)
                           ,
                           SizedBox(height: 20,),
@@ -142,14 +144,21 @@ class LoginScreen extends StatelessWidget {
                             ),
 
 
-                              SizedBox(width: 5,),
+                              SizedBox(width: 10,),
                               GetBuilder<AuthControlles>(builder: (_){
                                 return InkWell(onTap:(){
                                   controller.googleSignInApp();
                                 },
-                                  child: CircleAvatar(child: Image.network(
-                                      'https://play-lh.googleusercontent.com/6U'
-                                          'gEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1'))
+                                  child:CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    radius: 20,
+                                    child:  CircleAvatar(
+                                      radius: 20,
+                                        child: Image.network(
+                                            'https://play-lh.googleusercontent.com/6U'
+                                                'gEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1')
+                                    ),
+                                  )
 
                                   ,)  ;
                               }),

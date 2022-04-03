@@ -29,7 +29,7 @@ class SignUpScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor:Get.isDarkMode? Colors.white:Colors.black,
+          backgroundColor:Get.isDarkMode? Colors.black:Colors.green,
           elevation: 0,
 
         ),
@@ -43,6 +43,7 @@ class SignUpScreen extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.only(left: 25,right: 25,top: 40),
                   child:Form(
+
                     key: formKey,
                     child:  Column(
                     children: [
@@ -50,7 +51,7 @@ class SignUpScreen extends StatelessWidget {
                         UtiliesText(text: 'SIGN',
                             fontWeight: FontWeight.w500,
                             fontSize:28,
-                            color: Get.isDarkMode? Colors.green:Colors.pink,
+                            color: Get.isDarkMode? Colors.pink:Colors.green,
                             underLine: TextDecoration.none),
                         SizedBox(width: 3,),
                         UtiliesText(text: 'UP',
@@ -73,14 +74,12 @@ class SignUpScreen extends StatelessWidget {
                         } ,
                         obscureText: false,
                         prefixIcon:Get.isDarkMode?
-                        Icon(Icons.supervised_user_circle_outlined,color: Colors.green,)
-                            :
-                        Icon(Icons.person,color: Colors.pink,),
+                        Icon(Icons.person,color: Colors.pink,):
+                          Icon(Icons.supervised_user_circle_outlined,color: Colors.green,)
+                            ,
                         suffixIcon: Text(''),
                         hintText: 'UserName',
                       ),
-
-
 
                       SizedBox (height: 20,),
                       AuthTextFormField(
@@ -94,8 +93,9 @@ class SignUpScreen extends StatelessWidget {
                         } ,
                         obscureText: false,
                         prefixIcon: Get.isDarkMode?
-                        Icon(Icons.email,color: Colors.green,):
-                        Icon(Icons.email,color: Colors.pink,),
+                        Icon(Icons.email,color: Colors.pink,):
+
+                          Icon(Icons.email,color: Colors.green,),
                         suffixIcon: Text(''),
                         hintText: 'Email',
 
@@ -113,8 +113,11 @@ class SignUpScreen extends StatelessWidget {
                          } ,
                          obscureText: controller.isVisibility?false:true,
                          prefixIcon:Get.isDarkMode?
-                         Icon(Icons.lock,color: Colors.green,):
-                         Icon(Icons.lock,color: Colors.pink,),
+                         Icon(Icons.lock,color: Colors.pink,)
+:
+
+                         Icon(Icons.lock,color: Colors.green,)
+                         ,
                          suffixIcon: IconButton(onPressed: (){
                            controller.visibility();
                          },

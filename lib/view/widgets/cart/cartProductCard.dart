@@ -1,8 +1,24 @@
+import 'package:em/logic/controllers/cartcontroller.dart';
+import 'package:em/model/product_models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../model/product_models.dart';
+
 class CartProductCard extends StatelessWidget {
-  const CartProductCard({Key? key}) : super(key: key);
+final Welcome welcome;
+final int index;
+final int quantity;
+   CartProductCard(
+
+      {required this.welcome,
+        required this .index,
+        required this.quantity,
+        Key? key}) : super(key: key);
+  final controller = Get.find<CartController>();
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +43,7 @@ borderRadius: BorderRadius.circular(20),
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
-                      image: NetworkImage('https://images.unsplash.com/photo-1594583388647-364ea6532257?ixlib=rb-1.2.'
-                          '1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',),
+                      image: NetworkImage(welcome.image),
                       fit: BoxFit.cover
                   )
               ),
@@ -37,14 +52,14 @@ borderRadius: BorderRadius.circular(20),
             Expanded(child: Column(mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("flutter devolper codeudemyflutterdevolper code udemy",
+                Text(welcome.title,
                   style: TextStyle(
                       overflow: TextOverflow.ellipsis,
                       color: Get.isDarkMode ?Colors.white:Colors.black,
                       fontSize: 14,fontWeight: FontWeight.bold
 
                   ),),SizedBox(height: 20,),
-                Text("\$109.99",
+                Text("\$${controller.productSubTotal[index].toStringAsFixed(2)}",
                   style: TextStyle(
                       overflow: TextOverflow.ellipsis,
                       color: Get.isDarkMode ?Colors.white:Colors.black,
@@ -60,23 +75,31 @@ borderRadius: BorderRadius.circular(20),
              children: [
                Row(
                  children: [
-                   IconButton(onPressed: (){}, icon: Icon(Icons.remove_circle,
+                   IconButton(onPressed: (){
+                     controller.removeProductsFarmCart(welcome);
+
+                   }, icon: Icon(Icons.remove_circle,
                      color: Get.isDarkMode? Colors.white:Colors.black,)),
-                   Text("1",
+                   Text("$quantity",
                      style: TextStyle(
                          overflow: TextOverflow.ellipsis,
                          color: Get.isDarkMode ?Colors.white:Colors.black,
                          fontSize: 16,fontWeight: FontWeight.bold
 
                      ),),
-                   IconButton(onPressed: (){}, icon: Icon(Icons.add_circle,
+                   IconButton(onPressed: (){
+                     controller.addProductCart(welcome);
+
+                   }, icon: Icon(Icons.add_circle,
                      color: Get.isDarkMode? Colors.white:Colors.black,
 
                    )),
 
                  ],
                ),
-               IconButton(onPressed: (){}, icon: Icon(Icons.delete,
+               IconButton(onPressed: (){
+                 controller.removeOneProduct(welcome);
+               }, icon: Icon(Icons.delete,
                color:Get.isDarkMode? Colors.red:Colors.black,
                size: 20,))
              ],

@@ -5,11 +5,11 @@ import 'package:em/widgets/utilies.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../model/product_models.dart';
-class CardItems extends StatelessWidget {
-   CardItems({Key? key}) : super(key: key);
-   final searchList =Get.find<ProductController>();
-  final controller =Get.find<ProductController>();
+import '../../model/product_models.dart';
+class CardHome extends StatelessWidget {
+  CardHome({Key? key}) : super(key: key);
+   final controller =Get.find<ProductController>();
+  final cartcontroller =Get.find<CartController>();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,10 @@ class CardItems extends StatelessWidget {
 
             GridView.builder(
 
-              itemCount: controller.searchList.length,
+              itemCount:
+
+              controller.searchList.length
+                ,
                 gridDelegate:  const SliverGridDelegateWithMaxCrossAxisExtent(
                   childAspectRatio: .8,
                   mainAxisSpacing: 9,
@@ -75,21 +78,7 @@ class CardItems extends StatelessWidget {
                 );
 
                 }
-                return buildCardItems(
-                  image: controller.searchList[index].image,
-                  price: controller.searchList[index].price,
-                  rate: controller.searchList[index].rating.rate,
-                  productId: controller.searchList[index].id,
-                  Welcome: controller.searchList[index],
-                  onTap: (){
-                    Get.to(()=>ProductDetails(
-                      welcome: controller.searchList[index],
-                    )
-                    );
-                  }
-
-
-                );
+             
             })
 
 
@@ -97,9 +86,10 @@ class CardItems extends StatelessWidget {
       }
     });
   }
-}
 
-Widget buildCardItems(
+
+Widget
+buildCardItems(
 {
   required String image,
    required double price,
@@ -109,8 +99,7 @@ Widget buildCardItems(
   required Function() onTap,
 }
     ){
-  final controller =Get.find<ProductController>();
-  final cartController = Get.find<CartController>();
+
 
 
   return Padding(padding: EdgeInsets.all(5),
@@ -142,7 +131,7 @@ Widget buildCardItems(
               Icon(Icons.favorite_outline,
                 color: Colors.black,),),
             IconButton(onPressed: (){
-              cartController.addProductCart(Welcome);
+              cartcontroller.addProductCart(Welcome);
             },
               icon:Icon(Icons.shopping_cart),color: Colors.black,)
 
@@ -194,4 +183,5 @@ Widget buildCardItems(
     ) ,
   ),
   ));
+}
 }

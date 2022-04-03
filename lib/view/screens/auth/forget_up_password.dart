@@ -51,7 +51,7 @@ class ForgotPassword extends StatelessWidget {
               ,textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 18,
-                color: Get.isDarkMode?Colors.black:Colors.white
+                color: Get.isDarkMode?Colors.white:Colors.black
               ),)
               ,SizedBox(height: 60,),
               Image.network('https://corpjurist.com/assets/images/forgotpassword/forgot_password.png',
@@ -69,8 +69,9 @@ class ForgotPassword extends StatelessWidget {
                 } ,
                 obscureText: false,
                 prefixIcon: Get.isDarkMode?
-                Icon(Icons.email,color: Colors.green,):
-                Icon(Icons.email,color: Colors.pink,),
+                Icon(Icons.email,color: Colors.pink,):
+
+                  Icon(Icons.email,color: Colors.green,),
                 suffixIcon: Text(''),
                 hintText: 'Email',
 

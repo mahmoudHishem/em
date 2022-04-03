@@ -4,14 +4,18 @@
 import 'package:em/logic/bindings/auth_binding.dart';
 import 'package:em/logic/bindings/main_binding.dart';
 import 'package:em/logic/bindings/product_binding.dart';
+import 'package:em/logic/controllers/product_controller.dart';
 import 'package:em/view/screens/WelcomeScreen.dart';
 import 'package:em/view/screens/auth/forget_up_password.dart';
 import 'package:em/view/screens/auth/loginup_Screen.dart';
 import 'package:em/view/screens/auth/signup_Screen.dart';
+import 'package:em/view/screens/carditem.dart';
 import 'package:em/view/screens/mainScreen.dart';
 import 'package:em/view/screens/mainScreen.dart';
 import 'package:em/view/screens/mainScreen.dart';
 import 'package:get/get.dart';
+
+import '../view/screens/paymentscreen.dart';
 
 class AppRoutes{
   static const wellcome =Routes.wellcomeScreen;
@@ -40,6 +44,16 @@ class AppRoutes{
           AuthBinding(),MainBinding(),
           ProductBinding(),
         ]),
+    GetPage(name: Routes.carditem,
+        page: ()=> CardItem(),
+        bindings: [
+          AuthBinding(),
+          ProductBinding()        ]),
+    GetPage(name: Routes.paymentscreen,
+        page: ()=> PaymentScreen(),
+        bindings: [
+          AuthBinding(),
+          ProductBinding()  ,MainBinding(),      ]),
 
   ];
 }
@@ -49,6 +63,9 @@ class Routes{
   static const SignScreen='/SignScreen';
   static const forgotPassword='/ForgotPassword';
   static const mainScreen ='/MainScreen';
+  static const carditem ='/CardItem';
+  static const paymentscreen ='/PaymentScreen';
+
 
 
 

@@ -41,6 +41,21 @@ dependencies:
   firebase_messaging: ^11.2.8
   flutter_local_notifications: ^9.4.0
   http: ^0.13.4
+  badges: ^2.0.2
+  carousel_slider: ^4.0.0
+  smooth_page_indicator: ^1.0.0+2
+  flutter_rating_bar: ^4.0.0
+  readmore: ^2.1.0
+  geolocator: ^8.2.0
+  geocoding: ^2.0.4
+
+
+
+
+
+
+
+
 
 
 
@@ -68,8 +83,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-#    assets:
-#     - images/heart.png
+  assets:
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

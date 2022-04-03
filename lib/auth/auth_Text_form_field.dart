@@ -17,18 +17,26 @@ class AuthTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: TextStyle(color: Colors.black),
       controller: controller ,
       obscureText: obscureText,
       cursorColor: Colors.black,
       keyboardType: TextInputType.text,
+
+
       validator: (value)=>validator(value),
       decoration: InputDecoration(
         fillColor: Colors.grey.shade200,
         prefixIcon: prefixIcon,
         suffixIcon:suffixIcon ,
+
         hintText:hintText,
-        hintStyle: TextStyle(color: Colors.black45,
-            fontSize: 16,fontWeight: FontWeight.w500),filled: true,
+        hintStyle:
+        TextStyle(
+            color: Colors.black45,
+            fontSize: 16,
+            fontWeight: FontWeight.w500),
+        filled: true,
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: Colors.white

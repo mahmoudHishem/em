@@ -1,4 +1,4 @@
-import 'package:em/home/card%20home.dart';
+import 'package:em/widgets/home/card%20home.dart';
 import 'package:em/widgets/home/searchform.dart';
 import 'package:em/widgets/utilies.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +54,7 @@ class Home extends StatelessWidget {
                 underLine: TextDecoration.none),
           ),),
           SizedBox(height: 30,),
-          CardItems(),
+          CardHome(),
         ],
       ),
     ));

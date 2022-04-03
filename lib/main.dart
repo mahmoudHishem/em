@@ -1,6 +1,7 @@
-
+import 'package:em/language/localization.dart';
 import 'package:em/logic/controllers/theme.dart';
 import 'package:em/routes/routes.dart';
+import 'package:em/utilis/my_string.dart';
 import 'package:em/utilis/theme.dart';
 import 'package:em/view/screens/WelcomeScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,13 +25,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      locale: Locale(GetStorage().read<String>('lang').toString()),
+      fallbackLocale: Locale(ene),
+      translations: LocalizationApp(),
       title: 'Asroo shop',
      theme: ThemesApp.light,
       darkTheme: ThemesApp.dark,
       themeMode: ThemeController().themeDataGet,
 
       home: WellcomeScreen(),
-      initialRoute: AppRoutes.wellcome,
+      initialRoute: FirebaseAuth.instance.currentUser!=null||
+      GetStorage().read<bool>('auth')==true?
+      AppRoutes.mainScreen:AppRoutes.wellcome,
       getPages: AppRoutes.routes,
 
     );

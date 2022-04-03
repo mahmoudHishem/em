@@ -10,13 +10,14 @@ class WellcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(
+    return SafeArea(child:
+    Scaffold(
     body: Stack(
 children: [
 SizedBox(
 height: double.infinity,
 width: double.infinity,
-child: Image.network('https://i.pinimg.com/474x/a5/a0/5d/a5a05d2e95e97f6e2e2281f97d50b4c9.jpg',fit: BoxFit.cover,)
+child: Image.asset('assets/images/background.png',fit: BoxFit.cover,)
 
 ),
   Container(

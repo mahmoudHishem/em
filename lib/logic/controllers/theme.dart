@@ -11,7 +11,8 @@ class  ThemeController{
    bool getThemeDataFromBox(){
     return  boxStorage.read<bool>(Key) ?? false;
   }
-  ThemeMode get themeDataGet=> getThemeDataFromBox()? ThemeMode.dark:ThemeMode.light;
+  ThemeMode get themeDataGet=>
+      getThemeDataFromBox()? ThemeMode.dark:ThemeMode.light;
   void ChangesTheme() {
     Get.changeThemeMode(
         getThemeDataFromBox() ? ThemeMode.light : ThemeMode.dark);
